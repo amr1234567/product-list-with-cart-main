@@ -79,7 +79,6 @@ function reducer(state: State, action: Action): State {
       }
 
       default:
-         console.log("No matches");
          return state;
    }
 }
@@ -93,9 +92,9 @@ export const initialState: State = {
 };
 
 export const initProviderState: useProductsContextType = {
-   incrementQuantity: (id: number) => { },
-   decrementQuantity: (id: number) => { },
-   emptyQuantity: (id: number) => { },
+   incrementQuantity: () => { },
+   decrementQuantity: () => { },
+   emptyQuantity: () => { },
    checkConfirmOrder: () => { },
    confirmOrder: () => { },
    state: initialState

@@ -23,17 +23,9 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "no-unused-vars": ["warn"],
+      "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
       "@typescript-eslint/no-explicit-any": ["off"],
-      "no-unused-vars": [
-        "error",
-        {
-          vars: "local",
-          args: "after-used",
-          caughtErrors: "all",
-          ignoreRestSiblings: true,
-          reportUsedIgnorePattern: true,
-        },
-      ],
     },
   }
 );

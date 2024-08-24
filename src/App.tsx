@@ -3,21 +3,9 @@ import ProductItem from "./components/productItem";
 import { useProductList } from "./context/useProductsContext";
 import SelectedListSection from "./components/selectedListSection";
 import ConfirmOrderSection from "./components/confirmOrderSection";
-// import { useEffect } from "react";
 
 function App() {
   const { products, loading, checkConfirmOrder } = useProductList();
-  // useEffect(() => {
-  //   if (checkConfirmOrder) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, [checkConfirmOrder]);
   return (
     <>
       {checkConfirmOrder && (
