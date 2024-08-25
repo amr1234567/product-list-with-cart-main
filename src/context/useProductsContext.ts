@@ -5,6 +5,7 @@ import { Action, State } from "../models/contextModels";
 import { objectToProduct } from "../helpers/convertingFunctions";
 
 function reducer(state: State, action: Action): State {
+   console.log(state, action)
    switch (action.type) {
       case ActionConstants.FETCH_PRODUCTS:
          return { ...state, loading: true, error: null };
