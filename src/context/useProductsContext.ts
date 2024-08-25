@@ -27,7 +27,7 @@ function reducer(state: State, action: Action): State {
       case ActionConstants.DECREMENT_ITEM: {
          const newProducts = state.products.map((p) => {
             if (p.id === action.payload.id) {
-               return { ...p, quantity: p.quantity-- } as Product;
+               return { ...p, quantity: --p.quantity } as Product;
             }
             return p;
          });

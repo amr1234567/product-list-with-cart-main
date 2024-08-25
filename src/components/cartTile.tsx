@@ -7,7 +7,7 @@ function CartTile({ product }: Readonly<{ product: Product }>) {
   const totalPrice = useRef(product.price);
   useEffect(() => {
     totalPrice.current = product.price * product.quantity;
-  }, [product.quantity, product.price]);
+  }, [product]);
   return (
     <div className="cart-item" data-product-id="${product.productDetails.id}">
       <div className="details">
