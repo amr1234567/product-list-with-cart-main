@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../models/product";
 import { useCartListContext } from "../hooks/useCartListContext";
 
 function CartTile({ product }: Readonly<{ product: Product }>) {
   const { emptyQuantity } = useCartListContext();
-  const totalPrice = useRef(product.price);
+  const [totalPrice, setTotalPrice] = useState(product.price);
   useEffect(() => {
-    totalPrice.current = product.price * product.quantity;
+    if (product) {
+      setTotalPrice(product.price * product.quantity);
+    }
   }, [product]);
   return (
     <div className="cart-item" data-product-id="${product.productDetails.id}">
@@ -18,7 +20,7 @@ function CartTile({ product }: Readonly<{ product: Product }>) {
             <span className="additional-decoration-inner">@</span>
             <span className="price">${product.price.toFixed(2)}</span>
           </span>
-          <span className="total-price">${totalPrice.current.toFixed(2)}</span>
+          <span className="total-price">${totalPrice.toFixed(2)}</span>
         </div>
       </div>
       <button

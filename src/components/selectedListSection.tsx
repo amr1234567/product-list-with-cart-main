@@ -1,17 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import CartTile from "./cartTile";
 import { useCartListContext } from "../hooks/useCartListContext";
 
 const SelectedListSection = () => {
   const { products, checkConfirmOrder } = useCartListContext();
-  const totalPrice = useRef(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     console.log(products);
     let price = 0;
     products.forEach((product) => {
       price += product.price * product.quantity;
     });
-    totalPrice.current = price;
+    setTotalPrice(price);
   }, [products]);
 
   return (
@@ -28,7 +28,7 @@ const SelectedListSection = () => {
           </div>
           <div className="total-order-price">
             <span className="title">Order Total</span>
-            <span className="price">{totalPrice.current.toFixed(2)}</span>
+            <span className="price">{totalPrice.toFixed(2)}</span>
           </div>
           <div className="description">
             <img src="/assets/images/icon-carbon-neutral.svg" alt="carbon" />
