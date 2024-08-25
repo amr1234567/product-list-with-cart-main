@@ -21,6 +21,7 @@ function reducer(state: State, action: Action): State {
             return p;
          });
          const selectedProducts = newProducts.filter((p) => p.quantity > 0);
+         console.log({ ...state, products: newProducts, selectedProducts })
          return { ...state, products: newProducts, selectedProducts };
       }
       case ActionConstants.DECREMENT_ITEM: {
