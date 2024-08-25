@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Product } from "../models/product";
-import { useCartListContext } from "../context/useProductsContext";
+import { useCartListContext } from "../hooks/useCartListContext";
 
 function CartTile({ product }: Readonly<{ product: Product }>) {
   const { emptyQuantity } = useCartListContext();

@@ -1,8 +1,8 @@
 import "./App.css";
 import ProductItem from "./components/productItem";
-import { useProductList } from "./context/useProductsContext";
 import SelectedListSection from "./components/selectedListSection";
 import ConfirmOrderSection from "./components/confirmOrderSection";
+import { useProductList } from "./hooks/useProductList";
 
 function App() {
   const { products, loading, checkConfirmOrder } = useProductList();

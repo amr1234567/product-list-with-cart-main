@@ -1,36 +1,8 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { Product } from "../models/product";
 import { ActionConstants } from "../constants/actionTypes";
-
-export type State = {
-   products: Product[];
-   selectedProducts: Product[];
-   loading: boolean;
-   error: string | null;
-   checkConfirmOrder: boolean;
-};
-
-export type Action = {
-   type: string;
-   payload: any;
-}
-
-const objectToProduct = (obj: any): Product => {
-   return {
-      category: obj.category,
-      image: {
-         desktop: obj.image.desktop,
-         mobile: obj.image.mobile,
-         tablet: obj.image.tablet,
-         thumbnail: obj.image.thumbnail,
-      },
-      name: obj.name,
-      price: obj.price,
-      id: obj.id,
-      quantity: 0
-   } as Product;
-};
-
+import { Action, State } from "../models/contextModels";
+import { objectToProduct } from "../helpers/convertingFunctions";
 
 function reducer(state: State, action: Action): State {
    switch (action.type) {
@@ -83,22 +55,6 @@ function reducer(state: State, action: Action): State {
    }
 }
 
-export const initialState: State = {
-   products: [],
-   selectedProducts: [],
-   loading: false,
-   error: null,
-   checkConfirmOrder: false,
-};
-
-export const initProviderState: useProductsContextType = {
-   incrementQuantity: () => { },
-   decrementQuantity: () => { },
-   emptyQuantity: () => { },
-   checkConfirmOrder: () => { },
-   confirmOrder: () => { },
-   state: initialState
-};
 
 export const useProductsReducers = (initialState: State) => {
    const [state, dispatch] = useReducer(reducer, initialState);
@@ -107,7 +63,7 @@ export const useProductsReducers = (initialState: State) => {
       const controller = new AbortController(); // Create an AbortController instance
       const signal = controller.signal; // Extract the signal f
       dispatch({ type: ActionConstants.FETCH_PRODUCTS } as Action);
-      fetch("data.json", { signal }).then(res => res.json())
+      fetch("/data.json", { signal }).then(res => res.json())
          .then(products => {
             dispatch({ type: ActionConstants.FETCH_PRODUCTS_SUCCESS, payload: products.map((product: any) => objectToProduct(product)) });
          }).catch(err => {
@@ -134,23 +90,26 @@ export const useProductsReducers = (initialState: State) => {
    const confirmOrder = () => dispatch({ type: ActionConstants.CONFIRM_ORDER_SUCCESS, payload: undefined });
    return { state, incrementQuantity, decrementQuantity, emptyQuantity, checkConfirmOrder, confirmOrder };
 };
+
+export const initialState: State = {
+   products: [],
+   selectedProducts: [],
+   loading: false,
+   error: null,
+   checkConfirmOrder: false,
+};
+
+export const initProviderState: useProductsContextType = {
+   incrementQuantity: () => { },
+   decrementQuantity: () => { },
+   emptyQuantity: () => { },
+   checkConfirmOrder: () => { },
+   confirmOrder: () => { },
+   state: initialState
+};
+
+
+
 export type useProductsContextType = ReturnType<typeof useProductsReducers>;
 const ProductsContext = createContext<useProductsContextType>(initProviderState);
 export default ProductsContext;
-
-
-
-export const useProductList = () => {
-   const { state: { products, loading, error, checkConfirmOrder }, incrementQuantity, decrementQuantity } = useContext(ProductsContext);
-   return { products, error, loading, checkConfirmOrder, incrementQuantity, decrementQuantity };
-}
-
-export const useCartListContext = () => {
-   const { state: { selectedProducts }, emptyQuantity, checkConfirmOrder } = useContext(ProductsContext);
-   return { products: selectedProducts, emptyQuantity, checkConfirmOrder };
-}
-
-export const useConfirmOrderContext = () => {
-   const { state: { selectedProducts }, confirmOrder } = useContext(ProductsContext);
-   return { products: selectedProducts, confirmOrder };
-}

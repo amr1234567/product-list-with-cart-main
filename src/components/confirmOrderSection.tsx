@@ -1,4 +1,4 @@
-import { useConfirmOrderContext } from "../context/useProductsContext";
+import { useConfirmOrderContext } from "../hooks/useConfirmOrderContext";
 import ConfirmOrderItem from "./ConfirmOrderItem";
 
 function ConfirmOrderSection() {

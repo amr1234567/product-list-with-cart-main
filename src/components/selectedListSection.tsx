@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import CartTile from "./cartTile";
-import { useCartListContext } from "../context/useProductsContext";
+import { useCartListContext } from "../hooks/useCartListContext";
 
 const SelectedListSection = () => {
   const { products, checkConfirmOrder } = useCartListContext();

@@ -1,6 +1,6 @@
 import { Product } from "../models/product";
 import icon from "../../assets/images/icon-add-to-cart.svg";
-import { useProductList } from "../context/useProductsContext";
+import { useProductList } from "../hooks/useProductList";
 function ProductItem({ product }: Readonly<{ product: Product }>) {
   const { decrementQuantity, incrementQuantity } = useProductList();
   return (
