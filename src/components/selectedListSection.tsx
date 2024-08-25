@@ -6,6 +6,7 @@ const SelectedListSection = () => {
   const { products, checkConfirmOrder } = useCartListContext();
   const totalPrice = useRef(0);
   useEffect(() => {
+    console.log(products);
     let price = 0;
     products.forEach((product) => {
       price += product.price * product.quantity;
