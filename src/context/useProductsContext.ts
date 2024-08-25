@@ -66,6 +66,7 @@ export const useProductsReducers = (initialState: State) => {
       fetch("/data.json", { signal }).then(res => res.json())
          .then(products => {
             dispatch({ type: ActionConstants.FETCH_PRODUCTS_SUCCESS, payload: products.map((product: any) => objectToProduct(product)) });
+            console.log("products fetched")
          }).catch(err => {
             if (err.name !== 'AbortError') { // Ignore abort errors
                dispatch({ type: ActionConstants.FETCH_PRODUCTS_ERROR, payload: err.message });
@@ -77,11 +78,17 @@ export const useProductsReducers = (initialState: State) => {
    }, []);
 
    const incrementQuantity =
-      (id: number) => dispatch({ type: ActionConstants.INCREMENT_ITEM, payload: { id } })
-      ;
+      (id: number) => {
+         dispatch({ type: ActionConstants.INCREMENT_ITEM, payload: { id } });
+         console.log("incrementQuantity")
+      }
    const decrementQuantity =
-      (id: number) => dispatch({ type: ActionConstants.DECREMENT_ITEM, payload: { id } })
-      ;
+      (id: number) => {
+
+         dispatch({ type: ActionConstants.DECREMENT_ITEM, payload: { id } })
+         console.log("decrementQuantity")
+      }
+
    const emptyQuantity =
       (id: number) => dispatch({ type: ActionConstants.EMPTY_QUANTITY_ITEM, payload: { id } })
       ;

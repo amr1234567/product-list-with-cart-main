@@ -6,9 +6,11 @@ const SelectedListSection = () => {
   const { products, checkConfirmOrder } = useCartListContext();
   const totalPrice = useRef(0);
   useEffect(() => {
-    totalPrice.current = products.reduce((total, product) => {
-      return total + product.price * product.quantity;
-    }, 0);
+    let price = 0;
+    products.forEach((product) => {
+      price += product.price * product.quantity;
+    });
+    totalPrice.current = price;
   }, [products]);
 
   return (
