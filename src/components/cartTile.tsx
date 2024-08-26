@@ -11,7 +11,7 @@ function CartTile({ product }: Readonly<{ product: Product }>) {
     }
   }, [product]);
   return (
-    <div className="cart-item" data-product-id="${product.productDetails.id}">
+    <div className="cart-item" data-product-id={product.id}>
       <div className="details">
         <p className="name">{product.name}</p>
         <div className="numeric-details">
